@@ -1,4 +1,4 @@
-import { Component, input, ViewEncapsulation } from '@angular/core';
+import { Component, contentChild, ContentChild, ElementRef, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -9,5 +9,10 @@ import { Component, input, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlComponent {
+
+  @ContentChild('input') private control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>; // non-signal
+
+  private control2 = contentChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('input'); // signal
+
   title = input.required<string>();
 }
